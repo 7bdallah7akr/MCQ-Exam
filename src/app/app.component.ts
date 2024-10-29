@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './shared/component/navbar/navbar.component';
 import { AuthService } from './auth/services/auth.service';
 
@@ -13,13 +13,26 @@ import { AuthService } from './auth/services/auth.service';
 })
 export class AppComponent implements OnInit{
   service = inject(AuthService);
+  router = inject(Router);
+  role : any;
+
   ngOnInit(): void {
     this.getUserData()
   }
 
   getUserData(){
-    this.service.getRole().subscribe(res => {
+    this.service.getRole().subscribe((res:any) => {
       this.service.user.next(res);
+      this.role = res.role;
+      this.checkLogin();
     })
+  }
+  
+  checkLogin() {
+    if (!this.role) {
+      this.router.navigate(['login']);
+    }else{
+      this.router.navigate(['subjects']);
+    }
   }
 }

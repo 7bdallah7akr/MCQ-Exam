@@ -1,4 +1,3 @@
-import { Subject } from 'rxjs';
 import { Component, inject, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { DoctorService } from '../../../doctor/service/doctor.service';
