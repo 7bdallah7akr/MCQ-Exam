@@ -15,6 +15,6 @@ export const routes: Routes = [
     { path: 'students', component: StudentComponent },
     { path: 'subjects', component: SubjectComponent },
     { path: 'new-exam', component: NewExamComponent },
-    { path: '**', redirectTo: 'subjects', pathMatch: 'full' }
+    { path: '**', redirectTo: 'login', pathMatch: 'full' }
 ];
 
