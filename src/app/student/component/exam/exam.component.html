@@ -1,0 +1,67 @@
+<div class="exam-head container rounded-5 py-2 my-3 ">
+    <h2 class="text-white text-center">{{subject?.name}} Exam</h2>
+</div> 
+<!-- ////////////////////////////////////// -->
+<div class="container shadow rounded-4  p-2">
+    @for (item of subject?.questions; track $index) {
+        <div class="bg-body-secondary rounded-5 p-4 my-3 exam-box">
+            <p class="h3"><span class="text-danger">Question {{$index+1}} : </span>{{item?.question}}</p>
+            <div class="row ">
+                <div class="col-md-6 col-sm-12 mt-3">
+                    <span class="h4">A.</span>
+                    <label for="" class="mx-3 h5">{{item?.answerA}}</label>
+                    @if (userRole?.role=='students' && !showResult && valideExam){
+                     <input type="radio" (change)="getAnswer($index ,'answerA')" name="{{$index}}" value="{{item?.answerA}}">
+                    }
+                </div>
+                <div class="col-md-6 col-sm-12 mt-3">
+                    <span class="h4">B.</span>
+                    <label for="" class="mx-3 h5">{{item?.answerB}}</label>
+                    @if (userRole?.role=='students' && !showResult && valideExam){
+                     <input type="radio" (change)="getAnswer($index , 'answerB')" name="{{$index}}" value="{{item?.answerB}}">
+                    }
+                </div>
+                <div class="col-md-6 col-sm-12 mt-3">
+                    <span class="h4">C.</span>
+                    <label for="" class="mx-3 h5">{{item?.answerC}}</label>
+                    @if (userRole?.role=='students' && !showResult && valideExam){
+                     <input type="radio" (change)="getAnswer($index , 'answerC')" name="{{$index}}" value="{{item?.answerC}}">
+                    }
+                </div>
+                <div class="col-md-6 col-sm-12 mt-3">
+                    <span class="h4">D.</span>
+                    <label for="" class="mx-3 h5">{{item?.answerD}}</label>
+                    @if (userRole?.role=='students' && !showResult && valideExam){
+                     <input type="radio" (change)="getAnswer($index , 'answerD')" name="{{$index}}" value="{{item?.answerD}}">
+                    }
+                </div>
+                @if (showResult) {
+                    @if (item.studentAnswer !== item.correctAnswer) {
+                        <div class="alert alert-danger h4 text-center mt-3">
+                            <p>Correctanswer : <strong> {{item.correctAnswer}}</strong></p>
+                        </div>
+                    }
+                }
+                <div>
+                @if (userRole?.role=='doctor') {
+                    <button class="btn btn-danger text-start" (click)="onDelete($index)">Delete</button>
+                }
+            </div>
+            </div> <!--row-->
+        </div> <!--body-->
+    }
+        <div class="text-center mt-3">
+            @if (userRole?.role=='students') {
+                @if (showResult || !valideExam) {
+                    <div class="alert alert-info h4 text-center mt-3">
+                        <p>Score: <strong>{{total}}</strong> out of <strong>{{subject?.questions.length}}</strong></p>
+                    </div>
+                }
+                @if(!showResult &&  valideExam) {
+                    <button (click)="getResult()" class="btn btn-lg text-white rounded-5 btn-result">
+                        <i class="fas fa-check-circle me-2"></i>Result
+                    </button>
+                }
+            }
+        </div>
+    </div> <!--container-->

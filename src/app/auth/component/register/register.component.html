@@ -1,0 +1,58 @@
+<div class="body">
+    <div class="container p-3 rounded-4">
+        <h3 class="text-center">Create Account</h3>
+        <form [formGroup]="userForm">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input class="form-control" type="text" formControlName="username" name="username"
+                    placeholder="Your Name">
+                @if (userForm.get ('username')?. invalid && userForm. get ('username' )?.touched) {
+                @if (userForm.get ('username')?.errors?.['required']){
+                <small>Name is required</small>
+                }
+                }
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input class="form-control" type="email" formControlName="email" name="email"
+                    placeholder="you@example.com">
+                @if (userForm.get ('email')?. invalid && userForm. get ('email' )?.touched) {
+                @if (userForm.get ('email')?.errors?.['required']){
+                <small>Email is required</small>
+                }
+                @if (userForm.get ( 'email')?.errors?.['email']){
+                <small>Email should be valid.</small>
+                }
+                }
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input class="form-control" type="password" formControlName="password" name="password"
+                    placeholder="********">
+                @if (userForm.get ('password')?. invalid && userForm. get ('password' )?.touched) {
+                @if (userForm.get ('password')?.errors?.['required']){
+                <small>Password is required</small>
+                }
+                @if (userForm.get ( 'password')?.errors?.['minlength']){
+                <small>Password must be at least 4 characters long</small>
+                }
+                }
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password</label>
+                <input class="form-control" type="password" formControlName="confirmpassword" name="confirm-password"
+                    placeholder="********">
+                @if( (userForm.get ('confirmpassword')?.invalid || userForm.errors?.['passwordMismatch']) &&
+                userForm.get ('confirmpassword')?.touched){
+                @if (userForm.get('confirmpassword' )?.errors?.['required']){
+                <small>Confirm Password is required</small> <br>
+                }
+                @if (userForm.errors?.['passwordMismatch']){
+                <small>Passwords do not match </small>
+                }}
+            </div>
+            <button class="form-control btn-custom" [disabled]="userForm.invalid" (click)="submit()">Sign Up</button>
+            <p class="signin mt-3 text-center">Already have an acount ? <a routerLink='/login'>Signin</a> </p>
+        </form>
+    </div>
+</div>

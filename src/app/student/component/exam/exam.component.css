@@ -1,0 +1,27 @@
+.exam-head {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+}
+
+.exam-box {
+    transition: all 0.3s ease;
+}
+
+.exam-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+input[type="radio"] {
+    width: 20px;
+    height: 20px;
+  }
+.btn-result {
+    background-color: #4a90e2;    
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(74, 144, 226, 0.3);
+}
+
+.btn-result:hover {
+    background-color: #0a71ee;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(74, 144, 226, 0.4);
+}

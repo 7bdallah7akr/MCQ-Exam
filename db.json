@@ -1,0 +1,19 @@
+{
+  "students": [
+    
+  ],
+  "subjects": [],
+  "doctor": [
+    {
+      "id": "1",
+      "username": "Dr. Doctor",
+      "email": "admin@gmail.com",
+      "password": "246810"
+    }
+  ],
+  "login": [
+    {
+      "id": "1"
+    }
+  ]
+}

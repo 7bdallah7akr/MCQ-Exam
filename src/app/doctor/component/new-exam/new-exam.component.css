@@ -1,0 +1,44 @@
+input[type="radio"] {
+  width: 20px;
+  height: 20px;
+}
+
+.box {
+  position: relative;
+}
+.title-box {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+}
+ul{
+  list-style: none;
+}
+
+
+@media (max-width: 991px){
+  .box{
+    margin-top: 80px;
+  }
+}
+
+@media (max-width: 770px){
+  .box{
+    margin-top: 95px;
+  }
+}
+@media (max-width: 446){
+  .box{
+    margin-top: 155px;
+  }
+}
+.btn-custom {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-custom:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn-custom:active {
+  transform: translateY(0);
+}

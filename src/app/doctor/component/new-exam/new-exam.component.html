@@ -1,0 +1,142 @@
+<div class="container mt-5">
+  @if (currentPage === 'page1') {
+  <div class="border rounded-5 p-3 shadow box">
+    <div class="title-box border px-2 rounded-4 text-light shadow">
+      <h4 class="text-center mt-2">Subject Name</h4>
+    </div>
+    <div class="mb-3 w-50">
+      <label for="subjectName" class="form-label">Subject Name:</label>
+      <input type="text" class="form-control" [formControl]="name" placeholder="Enter subject name">
+    </div>
+    <button class="btn-custom btn btn-warning" (click)="cheakName()">Start</button>
+  </div>
+  }
+  <!-- /////////////////////////////////////////////////////////////////////////////// -->
+  @if (currentPage === 'page2') {
+  <div class="border rounded-5 p-3 pt-5 shadow box ">
+    <div class="title-box border rounded-4 px-2 text-light shadow ">
+      <p class="text-center mt-2 h4">{{name.value}} Questions <i class="fa-solid fa-pen"></i></p>
+    </div>
+    <form [formGroup]="questionsForm">
+      <div class="mb-3">
+        <label for="question" class="form-label h6">Question:</label>
+        <input type="text" class="form-control" formControlName="question" placeholder="Enter question">
+        @if (questionsForm.get ('question')?. invalid && questionsForm. get ('question' )?.touched) {
+        @if (questionsForm.get ('question')?.errors?.['required']){
+        <small>Question is required</small>
+        }
+        }
+      </div>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <div class="row">
+            <label class="form-label h6">Answer A</label>
+            <div class="d-flex justify-content-around col-12">
+              <input type="radio" name="answer" class="me-2 mt-2" vaule="answerA" (change)="getCorrect('answerA')"
+                [checked]="correctNum === 'answerA'">
+              <input type="text" class="form-control" formControlName="answerA" placeholder="Enter Answer A">
+            </div>
+            @if (questionsForm.get ('answerA')?. invalid && questionsForm. get ('answerA' )?.touched) {
+            @if (questionsForm.get ('answerA')?.errors?.['required']){
+            <small>Answer 1 is required</small>
+            }
+            }
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <div class="row">
+            <label class="form-label h6">Answer B</label>
+            <div class="d-flex justify-content-around col-12">
+              <input type="radio" name="answer" class="me-2 mt-2" vaule="answerB" (change)="getCorrect('answerB')"
+                [checked]="correctNum === 'answerB'">
+              <input type="text" class="form-control" formControlName="answerB" placeholder="Enter Answer B">
+            </div>
+            @if (questionsForm.get ('answerB')?. invalid && questionsForm. get ('answerB' )?.touched) {
+            @if (questionsForm.get ('answerB')?.errors?.['required']){
+            <small>Answer 2 is required</small>
+            }
+            }
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <div class="row">
+            <label class="form-label h6">Answer C</label>
+            <div class="d-flex justify-content-around col-12">
+              <input type="radio" name="answer" class="me-2 mt-2" vaule="answerC" (change)="getCorrect('answerC')"
+                [checked]="correctNum === 'answerC'">
+              <input type="text" class="form-control" formControlName="answerC" placeholder="Enter Answer C">
+            </div>
+            @if (questionsForm.get ('answerC')?. invalid && questionsForm. get ('answerC' )?.touched) {
+            @if (questionsForm.get ('answerC')?.errors?.['required']){
+            <small>Answer 3 is required</small>
+            }
+            }
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <div class="row">
+            <label class="form-label h6">Answer D</label>
+            <div class="d-flex justify-content-around col-12">
+              <input type="radio" name="answer" class="me-2 mt-2" vaule="answerD" (change)="getCorrect('answerD')"
+                [checked]="correctNum === 'answerD'">
+              <input type="text" class="form-control" formControlName="answerD" placeholder="Enter Answer D">
+            </div>
+            @if (questionsForm.get ('answerD')?. invalid && questionsForm. get ('answerD' )?.touched) {
+            @if (questionsForm.get ('answerD')?.errors?.['required']){
+            <small>Answer 4 is required</small>
+            }
+            }
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="d-flex justify-content-between">
+      <div>
+        <button class="btn-custom btn btn-success me-2" [disabled]="questionsForm.invalid  || preview"
+          (click)="creatQuestion()">Save</button>
+        <button class="btn-custom btn btn-secondary" (click)="cancel()">Cancel</button>
+      </div>
+      <div>
+        @if (itemEdit) {
+        <button class="btn-custom btn btn-warning me-2" (click)="update()"
+          [disabled]="questionsForm.invalid">Update</button>
+        }@else{
+        @if (preview) {
+        <button class="btn-custom btn btn-success me-2" (click)="previewQuestion()">Preview</button>
+        }@else {
+        <button class="btn-custom btn btn-success me-2" (click)="submit()" [disabled]="questionsForm.valid">
+          Finish</button>
+        }
+        }
+        <button class="btn-custom btn btn-danger" (click)="clear()">Delete</button>
+      </div>
+    </div>
+  </div>
+  }
+  <!-- ///////////////////////////////////////////// -->
+  @if (currentPage === 'page3') {
+    <div class="title-box border rounded-4 px-2 text-light shadow text-center">
+      <h4 class="text-center mt-2">{{name.value}} Review</h4>
+    </div>
+  @for (item of questions; track $index) {
+  <div class="border rounded-5 p-3 pt-5 shadow box">
+    <div class="quizBox">
+      <h5><span class="text-danger">Question {{$index+1}}</span>: {{item.question}}</h5>
+      <ul class="my-2">
+        <li class="h5">A. {{item.answerA}}</li>
+        <li class="h5">B. {{item.answerB}}</li>
+        <li class="h5">C. {{item.answerC}}</li>
+        <li class="h5">D. {{item.answerD}}</li>
+      </ul>
+      <h6 class="text-success">Correct Answer: {{item.correctAnswer}}</h6>
+      <div class="text-right mt-3">
+        <button class="btn-custom btn btn-warning me-2" (click)="edit($index)">Edit</button>
+        <button class="btn-custom btn btn-danger me-2" (click)="onDelete($index)">Delete</button>
+      </div>
+    </div>
+  </div>
+}
+<div class="text-center mt-3">
+    <button class="btn-custom btn btn-success btn-lg me-2" (click)="listFinish()">Finish</button>
+</div>
+}

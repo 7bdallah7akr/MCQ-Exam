@@ -1,0 +1,50 @@
+    <nav class="navbar navbar-expand-lg ">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center">
+                <img src="logo.jpg" alt="Logo" width="40" height="40" class="">
+                Exam Gateway
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    @if (user?.role == 'doctor') {
+                        <li class="nav-item mx-1">
+                            <a class="nav-link" routerLink="new-exam">NewExam</a>
+                        </li>
+                    }
+                    @if (user?.role == 'doctor') {
+                        <li class="nav-item mx-1">
+                            <a class="nav-link" routerLink="students">Students</a>
+                        </li>
+                    }
+                    @if (user !== null) {
+                        <li class="nav-item mx-1">
+                            <a class="nav-link" routerLink="subjects">Subjects</a>
+                        </li>
+                    }
+                    @if (user !== null) {
+                        <li class="nav-item mx-1" (click)="logOut()">
+                            <a class="nav-link" routerLink="login">Logout</a>
+                        </li>
+                    }
+                    @if (user == null) {
+                        <li class="nav-item mx-1">
+                            <a class="nav-link" routerLink="login">LogIn</a>
+                        </li>
+                    }
+                    @if (user == null) {
+                        <li class="nav-item mx-1">
+                            <a class="nav-link" routerLink="register">SignUp</a>
+                        </li>
+                    }
+                    @if (user !== null) {
+                        <li class="nav-item mx-1">
+                            <a class="nav-link" routerLink="">{{user?.username}}</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
